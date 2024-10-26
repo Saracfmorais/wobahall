@@ -9,7 +9,7 @@ Projeto criado para fins acadêmicos utilizando conceitos e métodos de gestão 
 ## 📝Tecnologias Utilizadas
 Utilizamos as tecnologias HTML e CSS para implementar o código base e estilizar o mesmo. PHP e MySQL utilizado para impletar o banco de dados e realizar a conexão com o mesmo. 
 
-## 📂Eatrutura
+## 📂Estrutura
 CSS: Integra os códigos de estilização do projeto
 IMG: Integra as imagens utilizadas para o projeto
 PHP: Engloba todos os arquivos criados com a funcionalidade de realizar a conexão com o Banco de Dados
