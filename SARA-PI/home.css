@@ -1,0 +1,318 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+header {
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+.logo img {
+    width: 70px;
+    height: 70px;
+}
+.logo span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #b300b3;
+    margin-left: 10px;
+}
+.nav-icons {
+    display: flex;
+}
+.nav-botao {
+   height: 100%;
+   padding: 25px;
+}
+.nav-botao i{
+    font-size: 18px;
+}
+.nav-botao:hover {
+    background-color: #f2f2f1;
+    cursor: pointer;
+}
+.progress-bar {
+    height: 10px;
+    background: linear-gradient(to right, #b300b3, #ffd700, #ff4500);
+}
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;   
+}
+
+/* Barra de Pesquisa */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: inline-flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 50px;  /* Borda circular */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px 20px;
+    margin-top: 20px;  /* Espaçamento superior */
+    margin-bottom: 20px;  /* Espaçamento inferior */
+}
+.b-yes  {
+    border-left: solid 0.5px #D1D1D1;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+}
+
+
+.input-group label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    border-radius: 20px;  /* Borda circular para os inputs */
+    background-color: #f5f5f5;
+    font-size: 14px;
+    width: 150px;
+    outline: none;
+}
+
+.search-input[type="date"] {
+    width: 120px;
+}
+
+.search-btn {
+    padding: 10px;
+    background-color: #ff385c;   
+    color: white;
+    border: none;
+    border-radius: 50%;  /* Botão circular */
+    cursor: pointer;
+    margin-left: 10px;
+}
+.search-btn i{
+    font-size: 15px;
+    padding: 10px;
+}
+
+.search-btn:hover {
+    background-color: #d11541;
+}
+
+/* Texto CTI */
+.search-results {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-results h2 {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+/* Cards de Lugares */
+.linha-cards{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.cards-section {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;   
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+.faixa-botoes{
+ width: 100%;
+ display: inline-flex;
+ justify-content: center;
+ gap: 10px;
+ padding: 10px 0;
+}
+.fav-btn {	   
+   color: rgb(0, 0, 0);
+    border: none;    
+    border-radius: 5px;
+    cursor: pointer;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+.fav-btn i{
+    font-size: 18px;
+}	
+
+.fav-btn:hover {
+ color: rgb(214, 6, 6);
+}
+
+.card-preco {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: text;
+}
+
+.card-btn:hover {
+    background-color: #0354ac;
+}
+
+.bloco{
+    width: 80%;
+}
+.faixa-img{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.faixa-img img{
+height: 160px;
+}
+.msg-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+.msg-card h3{
+    margin: 10px 0;
+}
+.msg-card p{
+    text-align: center;
+    padding: 0 40px;
+}
+
+.titulo{    
+    margin: 40px 0;
+    text-align: center;
+}
+.lugares-faixa {
+    display: flex;
+    gap: 45px;
+    background-color: #f5f5f5;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.lugares-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.lugares-imagem {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.lugares-titulo {   
+    font-size: 16px;
+    margin: 10px;
+}
+
+.lugares-chacaras {
+    font-size: 15px;
+    margin: 5px 10px;
+    color: #242222;
+}
+
+.lugares-media {
+    font-size: 15px;
+    margin: 5px 10px;
+    color: #555;
+}
+
+.footer {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-phrase {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    margin: 0;
+    color: #777;
+}
