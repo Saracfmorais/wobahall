@@ -2,7 +2,7 @@
 session_start();
 
 // Conexão com o banco de dados
-$host = 'localhost';
+$host = 'localhost';    
 $user = 'root';
 $password = '';
 $dbname = 'wobahall';

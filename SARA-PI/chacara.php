@@ -1,10 +1,11 @@
 <?php
-// Conectar ao banco de dados
-// Conexão com o banco de dados
+// Configurações de conexão
 $host = 'localhost';
-$user = 'root';
-$password = '';
-$dbname = 'wobahall';
+$user = 'root';          // Usuário padrão do XAMPP
+$password = '';          // Senha padrão do XAMPP é vazia
+$dbname = 'wobahall';     // Nome do banco de dados
+
+// Conectar ao banco de dados
 $conn = new mysqli($host, $user, $password, $dbname);
 
 // Verificar a conexão
@@ -12,8 +13,11 @@ if ($conn->connect_error) {
     die("Erro na conexão: " . $conn->connect_error);
 }
 
+// Seu código aqui para consultas e exibição
+
 // Consulta para buscar chácaras
 $sql = "SELECT 
+            c.CHA_INT_ID,  -- Incluímos o ID da chácara para o link
             c.CHA_VAR_CAPA,
             e.END_VAR_BAIRRO,
             e.END_VAR_CIDADE,
@@ -28,8 +32,15 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-   
-        <?php while ($row = $result->fetch_assoc()): ?>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Chácaras</title>
+    <!-- Adicione estilos conforme necessário -->
+</head>
+<body>
+    <?php while ($row = $result->fetch_assoc()): ?>
+        <!-- Link para a página de detalhes envolvendo o card -->
+        <a href="detalhes_chacara.php?id=<?php echo $row['CHA_INT_ID']; ?>" style="text-decoration: none; color: inherit;">
             <div class="card">
                 <img src="<?php echo $row['CHA_VAR_CAPA']; ?>" alt="Imagem da Chácara" class="card-img">
                 <h3><?php echo $row['END_VAR_BAIRRO'] . ", " . $row['END_VAR_CIDADE']; ?></h3>
@@ -44,6 +55,11 @@ $result = $conn->query($sql);
                     <div class="card-preco">R$<?php echo $row['CHA_DEC_PRECO']; ?> diária</div>
                 </div>
             </div>
-        <?php endwhile; ?>
-    
+        </a>
+    <?php endwhile; ?>
+</body>
 </html>
+
+<?php
+$conn->close();
+?>
