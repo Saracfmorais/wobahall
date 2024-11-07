@@ -17,18 +17,21 @@ session_start();
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="logo-wobahall.png" alt="WOBA Logo">
-            <span>WOBA HALL</span>
-        </div>
-        <div class="nav-icons">
-            <div class="nav-botao"><i class="fa-regular fa-heart"></i> Favoritos</div>
-            <div class="nav-botao"><i class="fa-regular fa-user"></i><?php if(isset($_SESSION['nome_usuario'])): ?>
-                    <?php echo $_SESSION['nome_usuario']; ?>
-                <?php else: ?>
-                    Logar
-                <?php endif; ?></div>            
-        </div>
+    <div class="logo">
+    <img src="logo-wobahall.png" alt="WOBA Logo">
+    <span>WOBA HALL</span>
+</div>
+<div class="nav-icons">
+    <div class="nav-botao"><i class="fa-regular fa-heart"></i> Favoritos</div>
+    <div class="nav-botao"><i class="fa-regular fa-user"></i>
+        <?php if (isset($_SESSION['nome_usuario'])): ?>
+            <?php echo $_SESSION['nome_usuario']; ?>
+        <?php else: ?>
+            <a href="login.php">Logar</a>
+        <?php endif; ?>
+    </div>            
+</div>
+
     </header>
     <div class="progress-bar"></div>
     <!-- Barra de Pesquisa -->
