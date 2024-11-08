@@ -1,6 +1,34 @@
 <?php
 session_start();
+
+// Conexão com o banco de dados
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'wobahall';
+$conn = new mysqli($host, $user, $password, $dbname);
+
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão: " . $conn->connect_error);
+}
+
+// Buscar cidades onde há chácaras
+$cidades_query = "SELECT DISTINCT e.END_VAR_CIDADE FROM enderecos e JOIN chacaras c ON e.END_INT_ID = c.CHA_INT_ENDERECO_ID";
+$cidades_result = $conn->query($cidades_query);
+$cidades = [];
+while ($row = $cidades_result->fetch_assoc()) {
+    $cidades[] = $row['END_VAR_CIDADE'];
+}
+
+// Buscar capacidade máxima de hóspedes
+$hospedes_query = "SELECT MAX(CHA_INT_HOSPEDES) as max_hospedes FROM chacaras";
+$hospedes_result = $conn->query($hospedes_query);
+$max_hospedes = $hospedes_result->fetch_assoc()['max_hospedes'] ?? 10; // valor padrão se não houver chácaras
+
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -36,26 +64,32 @@ session_start();
     <div class="progress-bar"></div>
     <!-- Barra de Pesquisa -->
     <section class="search-bar">
-        <form class="search-form">
-            <div class="input-group">
-                <label>Onde</label>
-                <input type="text" placeholder="Buscar destinos" class="search-input">
-            </div>
-            <div class="input-group b-yes">
-                <label>Período Início</label>
-                <input type="date" class="search-input">
-            </div>
-            <div class="input-group b-yes">
-                <label>Período Fim</label>
-                <input type="date" class="search-input">
-            </div>
-            <div class="input-group b-yes">
-                <label>Quem</label>
-                <input type="text" placeholder="Quantidade pessoas" class="search-input">
-            </div>
-            <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-    </section>
+    <form class="search-form" action="resultados.php" method="GET">
+        <div class="input-group">
+            <label>Onde</label>
+            <select name="cidade" class="search-input">
+                <option value="">Selecione uma cidade</option>
+                <?php foreach ($cidades as $cidade): ?>
+                    <option value="<?php echo $cidade; ?>"><?php echo $cidade; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="input-group b-yes">
+            <label>Período Início</label>
+            <input type="date" name="data_inicio" class="search-input">
+        </div>
+        <div class="input-group b-yes">
+            <label>Período Fim</label>
+            <input type="date" name="data_fim" class="search-input">
+        </div>
+        <div class="input-group b-yes">
+            <label>Quem</label>
+            <input type="number" name="hospedes" placeholder="Quantidade pessoas" class="search-input" min="1" max="<?php echo $max_hospedes; ?>">
+        </div>
+        <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </form>
+</section>
+
 
     <!-- Texto CTI -->
     <section class="search-results">

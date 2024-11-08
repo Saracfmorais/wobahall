@@ -38,7 +38,7 @@ header {
     cursor: pointer;
 }
 .progress-bar {
-    height: 10px;
+    height: 5px;
     background: linear-gradient(to right, #b300b3, #ffd700, #ff4500);
 }
 /* Reset básico */
