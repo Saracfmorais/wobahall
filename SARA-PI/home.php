@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Conexão com o banco de dados
 $host = 'localhost';
 $user = 'root';
@@ -55,9 +54,9 @@ $conn->close();
         <?php if (isset($_SESSION['nome_usuario'])): ?>
             <?php echo $_SESSION['nome_usuario']; ?>
         <?php else: ?>
-            <a href="login.php">Logar</a>
+           <a class="logar" href="./login/login.php"> Logar
         <?php endif; ?>
-    </div>            
+    </div></a>         
 </div>
 
     </header>

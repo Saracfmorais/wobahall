@@ -1,32 +1,65 @@
 <?php
-// Supondo que as datas de check-in e checkout foram recebidas via GET
-$data_inicio = $_GET['data_inicio'];
-$data_fim = $_GET['data_fim'];
+session_start();
 
-// Conectar ao banco de dados para buscar chácaras disponíveis
+// Conexão com o banco de dados
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'wobahall';
 $conn = new mysqli($host, $user, $password, $dbname);
 
-$sql = "SELECT c.CHA_INT_ID, c.CHA_VAR_NOME, c.CHA_DEC_PRECO 
-        FROM chacaras c
-        JOIN disponibilidade_chacara d ON c.CHA_INT_ID = d.CHA_INT_ID
-        WHERE d.DISP_DAT_INICIO <= ? 
-          AND d.DISP_DAT_FIM >= ? 
-          AND d.DISP_BOOL_DISPONIVEL = TRUE";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $data_inicio, $data_fim);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<div class='chacara'>";
-        echo "<h2>" . $row['CHA_VAR_NOME'] . "</h2>";
-        echo "<p>Preço: R$ " . number_format($row['CHA_DEC_PRECO'], 2, ',', '.') . "</p>";
-        echo "</div>";
-    }
-} else {
-    echo "Nenhuma chácara disponível para as datas selecionadas.";
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Erro na conexão: " . $conn->connect_error);
 }
 
+// Capturar os parâmetros de filtro
+$cidade = $_GET['cidade'] ?? '';
+$data_inicio = $_GET['data_inicio'] ?? '';
+$data_fim = $_GET['data_fim'] ?? '';
+$hospedes = $_GET['hospedes'] ?? '';
+
+// Montar a consulta SQL com filtros
+$sql = "SELECT c.*, e.END_VAR_CIDADE FROM chacaras c 
+        JOIN enderecos e ON c.CHA_INT_ENDERECO_ID = e.END_INT_ID
+        WHERE 1=1";
+
+if (!empty($cidade)) {
+    $sql .= " AND e.END_VAR_CIDADE = '$cidade'";
+}
+if (!empty($hospedes)) {
+    $sql .= " AND c.CHA_INT_HOSPEDES >= $hospedes";
+}
+
+// Consultar os resultados no banco de dados
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Pesquisa</title>
+</head>
+<body>
+    <h1>Resultados da Pesquisa</h1>
+
+    <?php if ($result && $result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <div class="card">
+                <h3><?php echo $row['END_VAR_CIDADE']; ?></h3>
+                <p><?php echo $row['CHA_INT_HOSPEDES']; ?> hóspedes, <?php echo $row['CHA_INT_QUARTOS']; ?> quartos</p>
+                <p>Preço: R$ <?php echo $row['CHA_DEC_PRECO']; ?> por diária</p>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>Nenhuma chácara encontrada para os critérios de pesquisa.</p>
+    <?php endif; ?>
+
+</body>
+</html>
+
+<?php
 $conn->close();
 ?>

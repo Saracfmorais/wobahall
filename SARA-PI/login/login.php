@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <a class="bt_volta" id="volta" href="../home/home.html">Voltar</a>
+  <a class="bt_volta" id="volta" href="../home.php">Voltar</a>
 
   <script src="login.js"></script>
 </body>
